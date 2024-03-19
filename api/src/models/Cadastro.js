@@ -8,7 +8,7 @@ export default class Cadastro extends Model {
         defaultValue: '',
         validate: {
           len: {
-            args: [3, 255],
+            args: [1, 255],
             msg: 'Nome precisa ter entre 3 e 255 caracteres.',
           },
         },

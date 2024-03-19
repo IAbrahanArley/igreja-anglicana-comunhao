@@ -6,7 +6,6 @@ import './src/database';
 
 import express from 'express';
 import cors from 'cors';
-import homeRoutes from './src/routes/homeRoutes';
 import userRoutes from './src/routes/userRoutes';
 import tokenRoutes from './src/routes/tokenRoutes';
 import cadastroRoutes from './src/routes/cadastroRoutes ';
