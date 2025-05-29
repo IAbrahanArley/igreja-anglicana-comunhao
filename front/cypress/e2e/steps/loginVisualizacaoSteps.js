@@ -5,7 +5,6 @@ const ADMIN_PASSWORD  = "Wx8~)82+O!ZjkA?";
 const LAST_DONOR_NAME = "João Silva";
 
 Given("que eu tenho credenciais válidas de administrador", () => {
-  // apenas sinaliza que as credenciais existem
 });
 
 Given("que eu estou na página de login", () => {
