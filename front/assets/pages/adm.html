@@ -48,6 +48,9 @@
         </div>
     </nav>
     <div>
+        <div id="exclusao-msg" class="alert alert-warning d-none" role="alert">
+            Doação excluída com sucesso!
+        </div>
         <table class="table" id="clients">
             <thead>
                 <tr>
@@ -70,47 +73,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script>
-      
-    </script>
-    <!-- <script>
-        const url = 'http://localhost:3001';
-
-        const createbutton = (label, type) => {
-            return $('<button>').addClass(`btn btn-${type}`).html(label)
-        }
-
-        const renderRows = cadastros => {
-            const rows = cadastros.map(cadastro => {
-                const removeButton = createbutton('Excluir', 'danger');
-                removeButton.click(() => removeCadastro(cadastro));
-
-                const novaLinha = $('<tr>');
-                return novaLinha.append($('<td>').text(cadastro.nome))
-                    .append($('<td>').text(cadastro.email))
-                    .append($('<td>').text(cadastro.telefone))
-                    .append($('<td>').text(cadastro.valor))
-                    .append($('<td>').text(cadastro.projeto))
-                    .append($('<td>').append(updateButton))
-            });
-            $('#clientsRows').html(rows);
-        }
-        const removeCadastro = cadastro => {
-            $.ajax({
-                method: 'DELETE',
-                url: `${url}/cadastro/${id}`,
-                success: getCadastro
-            })
-        }
-        const getCadastro = () => {
-            $.ajax({
-                url: `${url}/cadastro`,
-                success: cadastros => {
-                    renderRows(cadastros);
-                }
-            });
-        };
-    </script> -->
 </body>
 
 </html>

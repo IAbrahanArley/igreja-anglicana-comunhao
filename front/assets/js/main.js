@@ -5,28 +5,40 @@ const createbutton = (label, type) => {
 }
 
 const renderRows = cadastros => {
-    const rows = cadastros.map(cadastro => {
-        const removeButton = createbutton('Excluir', 'danger');
-        removeButton.click(() => removeCadastro(cadastro));
+  const rows = cadastros.map(c => {
+    const excluirBtn = $('<button>')
+      .addClass('btn btn-sm btn-danger')
+      .text('Excluir')
+      .click(() => removeCadastro(c.id));
 
-        const novaLinha = $('<tr>');
-        return $('<tr>')
-            .append($('<td>').text(cadastro.nome))
-            .append($('<td>').text(cadastro.email))
-            .append($('<td>').text(cadastro.telefone))
-            .append($('<td>').text(cadastro.valor))
-            .append($('<td>').text(cadastro.projeto))
-            .append($('<td>').append(removeButton))
-    });
-    $('#clientsRows').append(rows);
-}
-const removeCadastro = cadastro => {
+    return $('<tr>')
+      .append($('<td>').text(c.nome))
+      .append($('<td>').text(c.email))
+      .append($('<td>').text(c.telefone))
+      .append($('<td>').text(c.valor))
+      .append($('<td>').text(c.projeto))
+      .append($('<td>').append(excluirBtn));
+  });
+
+  $('#clientsRows').html(rows);
+};
+
+const removeCadastro = (id) => {
     $.ajax({
         method: 'DELETE',
         url: `${url}/${id}`,
-        success: getCadastros
-    })
-}
+        success: function () {
+            getCadastros();
+            const msg = document.getElementById('exclusao-msg');
+            msg.classList.remove('d-none');
+            setTimeout(() => msg.classList.add('d-none'), 5000);
+        },
+        error: function (err) {
+            console.error('Erro ao excluir:', err);
+        }
+    });
+};
+
 const getCadastros = () => {
     $.ajax({
         url: `${url}/`,
@@ -40,45 +52,39 @@ const getCadastros = () => {
 
 
 const saveCadastro = () => {
-    const id = document.getElementById('id').value;
-    const nome = document.getElementById('name').value;
-    const telefone = document.getElementById('telefone').value;
-    const email = document.getElementById('email').value;
-    const valor = document.getElementById('valordoacao').value;
-    const projeto = document.getElementById('test').value;
-    $.ajax({
-        method: id ? 'PUT' : 'POST',
-        url: `${url}/${id}`,
-        data: id ? { id, nome } : { nome, telefone, email, valor, projeto },
-        success: function (response) {
-            getCadastros,
-            window.alert('Agradecemos sua solicitação, em breve entraremos em contato!');
-        }
-    })
-}
+  const id        = document.getElementById('id').value;
+  const nome      = document.getElementById('name').value;
+  const telefone  = document.getElementById('telefone').value;
+  const email     = document.getElementById('email').value;
+  const valor     = document.getElementById('valordoacao').value;
+  const projeto   = document.getElementById('test').value;
+
+  const dados = id
+    ? { id, nome }
+    : { nome, telefone, email, valor, projeto };
+
+  $.ajax({
+    method: id ? 'PUT' : 'POST',
+    url: `${url}${id ? '/' + id : ''}`,
+    contentType: 'application/json',
+    data: JSON.stringify(dados),
+    success: function (response) {
+      getCadastros();
+      const msg = document.getElementById('sucesso-msg');
+      msg.classList.remove('d-none');
+      setTimeout(() => msg.classList.add('d-none'), 5000);
+      document.getElementById('meuformulario').reset();
+    },
+    error: function (err) {
+      console.error('Erro ao enviar doação:', err);
+    }
+  });
+};
+
 $(() => {
-    getCadastros();
-    $(`[save]`).click(saveCadastro)
+  getCadastros();
+  $('[save]').click(function (e) {
+    e.preventDefault();
+    saveCadastro();
+  });
 });
-
-/* function obter() {
-
-    var retorno = [];
-
-    var consulta = $.ajax({
-        url: 'https://localhost:3001/cadastro',
-        method: 'GET',
-        dataType: 'json',
-        async: false
-    }).fail(function () {
-        return retorno;
-    });
-
-    consulta.done(function (data) {
-        retorno = data;
-    });
-
-    return retorno;
-} */
-
-// ===================== AUTENTICAÇAO ============================

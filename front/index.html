@@ -215,6 +215,9 @@
                 </div>
             </div>
             <div class="col-md" style="margin-top: 5%;">
+                <div id="sucesso-msg" class="alert alert-success d-none" role="alert">
+                    Obrigado pela sua doação!
+                </div>
                 <form id="meuformulario" class="row g-5 needs-validation" novalidate style="color: #000;">
                     <div>
                         <input id="id" name="id " type="hidden">
@@ -299,47 +302,7 @@
         crossorigin="anonymous"></script>
     <script src="assets/js/jquery-3.6.4.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <!-- <script>
-        const url = 'http://localhost:3001';
-        const saveCadastro = () => {
-            const id = $('[name = id]').val;
-            const nome = $('[name = name]').val;
-            const telefone = $('[name = telefone]').val;
-            const email = $('[name = email]').val;
-            const valor = $('[name = valordoacao]').val;
-            const projeto = $('[name = test]').val;
-
-            $.ajax({
-
-                method: 'POST',
-                url: `${url}/cadastro`,
-                data: { nome, telefone, email, valor, projeto },
-                
-            })
-        }
-        $(() => {
-            $(`[save]`).click(saveCadastro)
-        });
-        document.getElementById('meuformulario').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const id = document.getElementById('id').value;
-            const nome = document.getElementById('name').value;
-            const telefone = document.getElementById('telefone').value;
-            const email = document.getElementById('email').value;
-            const valor = document.getElementById('valordoacao').value;
-            const projeto = document.getElementById('test').value;
-            const obj = {
-                id,
-                nome,
-                email,
-                valor,
-                telefone,
-                projeto
-            }
-            console.log(obj);
-            inserirMensagem(obj);
-        }); 
-    </script> -->
+   
 </body>
 
 

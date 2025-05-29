@@ -58,6 +58,8 @@
     <section>
         <div class="form-box">
             <div class="form-value">
+                <p id="error-message" class="text-danger mt-3" style="display: none;"></p>
+
                 <form id="minhaauth">
                     <h2>Log In</h2>
                     <div class="inputbox">
@@ -103,15 +105,18 @@
                     localStorage.setItem('token', response);
                     window.location.href = 'adm.html';
                 },
-                error: function (error) {
-                    window.alert('Erro: Email ou Senha inválido', error);
-                }
+              error: function (error) {
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.textContent = 'Erro: Email ou senha inválidos.';
+                errorMessage.style.display = 'block';
+                setTimeout(() => {
+                     errorMessage.style.display = 'none';
+                }, 5000); 
+
+        } 
+
             });
         });
-
-
-
-
     </script>
 </body>
 
